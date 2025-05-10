@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedListStructs.h"
+#include "DoublyLinkedListStructs.h"
 
 List *createList() {
     List *newList = (List *)malloc(sizeof(List));
@@ -119,6 +119,8 @@ void bubbleSort(List *list) {
     } while (swapped);
 }
 
+
+//questão 1
 int countElements(List *list) {
     Node *current = list->head;
     int count = 0;
@@ -129,6 +131,7 @@ int countElements(List *list) {
     return count;
 }
 
+//questão 2
 void searchElement(List *list, int value) {
     Node *current = list->head;
     while (current != NULL) {
@@ -141,6 +144,7 @@ void searchElement(List *list, int value) {
     printf("Not found\n");
 }
 
+//questao 3
 void copyFromArray(List *list, int *array, int size) {
     for (int i = 0; i < size; i++) {
         Node *newNode = createNode(array[i]);
@@ -157,6 +161,7 @@ void copyFromArray(List *list, int *array, int size) {
     printf("Copied from array\n");
 }
 
+//questao 4
 void exportToArray(List *list, int *array) {
     Node *current = list->head;
     int index = 0;
@@ -167,31 +172,101 @@ void exportToArray(List *list, int *array) {
     printf("Exported to array\n");
 }
 
-int main(void) {
-    //Question 1
-    List *myList = createList();
-    add(30, myList);
-    add(20, myList);
-    add(10, myList);
-    printList(myList);
-
-    //Question 2
-    printf("Size: %d\n", countElements(myList));
-    searchElement(myList, 20);
-
-    //Question 3
-    int arr[] = {0, -10, -20};
-    copyFromArray(myList, arr, 3);
-    printList(myList);
-
-    //Question 4
-    int outputArr[6];
-    exportToArray(myList, outputArr);
-    printf("Array contents:\n");
-    for (int i = 0; i < 6; i++) {
-        printf("%d ", outputArr[i]);
+//questao 5
+Node *createCopyOfList(Node *head){
+    if(head == NULL){
+        return head;
     }
-    printf("\n");
 
-    free(myList);
+    Node *current = head;
+    Node *newHead = NULL;
+    Node *newTail = NULL;
+
+    while(current != NULL){
+        // Create a new node with the same data
+        Node* newNode = (Node*)malloc(sizeof(Node));
+        
+        if (newNode == NULL) {
+            return NULL;
+        }
+
+        newNode->value = current->value;
+        newNode->next = NULL;
+
+        if (newHead == NULL) {
+            // If the new list is empty, set the new node as the head
+            newHead = newNode;
+            newTail = newNode;
+        } else {
+            // Otherwise, add the new node to the end of the list
+            newTail->next = newNode;
+            newTail = newNode;
+        }
+        // Move to the next node in the original list
+        current = current->next;
+    }
+    return newHead;
 }
+
+//questao 6
+void concatLists(List *list1, List *list2){
+    if(list1->head == NULL){
+        printf("List 1 is empty\n");
+        return;
+    }
+
+    if(list2->head == NULL){
+        printf("List 2 is empty\n");
+        return;
+    }
+
+    list1->tail->next = list2->head;
+    list1->tail = list2->tail;
+}
+
+//questao 7
+List *invertList(List *list){
+    if (list == NULL || list->size < 2) return list;
+
+    Node *current = list->head;
+    Node *temp = NULL;
+
+    // Inverte os ponteiros de cada nó
+    while (current != NULL) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev; // agora prev aponta para o próximo
+    }
+
+    // Troca head e tail
+    temp = list->head;
+    list->head = list->tail;
+    list->tail = temp;
+
+    return list;
+}
+
+//questao 8
+void equalLists(List *list1, List *list2){
+    if(list1->size != list2->size){
+        printf("Not equal\n");
+        return;
+    }
+
+    Node *ptrList1 = list1->head;
+    Node *ptrList2 = list2->head;
+
+    while(ptrList1 != NULL){
+        if(ptrList1->value != ptrList2->value){
+            printf("Not equal\n");
+            return;
+        }
+        ptrList1 = ptrList1->next;
+        ptrList2 = ptrList2->next;
+    }
+
+    printf("Equal!\n");
+
+}
+

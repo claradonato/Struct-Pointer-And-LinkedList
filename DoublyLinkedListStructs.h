@@ -1,5 +1,5 @@
-#ifndef LINKEDLISTSTRUCTS_H
-#define LINKEDLISTSTRUCTS_H
+#ifndef DOUBLYLINKEDLISTSTRUCTS_H
+#define DOUBLYLINKEDLISTSTRUCTS_H
 
 typedef struct Node {
     int value;
@@ -42,5 +42,17 @@ void copyFromArray(List *list, int *array, int size);
 
 // Exports values from the list into an integer array
 void exportToArray(List *list, int *array);
+
+// Create a copy of a list
+Node *createCopyOfList(Node *head);
+
+//Concat two lists
+void concatLists(List *list1, List *list2);
+
+//Invert list
+List *invertList(List *list);
+
+//Checks if the lists are equal
+void equalLists(List *list1, List *list2);
 
 #endif
