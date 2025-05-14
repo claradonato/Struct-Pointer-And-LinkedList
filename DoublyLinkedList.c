@@ -270,3 +270,23 @@ void equalLists(List *list1, List *list2){
 
 }
 
+//questao 9
+void insElementAscd(int newNumber, List *list){
+    Node *newNode = createNode(newNumber);
+    Node *ptr = list->head;
+
+    int i = 0;
+    while(i < list->size){
+        if(ptr->value < newNumber && ptr->next->value > newNumber){
+            newNode->prev = ptr;
+            newNode->next = ptr->next;
+            ptr->next->prev = newNode;
+            ptr->next = newNode;
+            printf("Inserted!\n");
+            return;
+        }
+        ptr = ptr->next;
+        i++;
+    }
+    printf("Not inserted!\n");
+}

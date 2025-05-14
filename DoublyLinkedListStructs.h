@@ -55,4 +55,6 @@ List *invertList(List *list);
 //Checks if the lists are equal
 void equalLists(List *list1, List *list2);
 
+void insElementAscd(int newNumber, List *list);
+
 #endif

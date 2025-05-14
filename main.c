@@ -32,13 +32,13 @@ int main(void) {
     // printList(myList);
 
     //Question 4
-    int outputArr[6];
-    exportToArray(myList, outputArr);
-    printf("Array contents:\n");
-    for (int i = 0; i < 6; i++) {
-        printf("%d ", outputArr[i]);
-    }
-    printf("\n");
+    // int outputArr[6];
+    // exportToArray(myList, outputArr);
+    // printf("Array contents:\n");
+    // for (int i = 0; i < 6; i++) {
+    //     printf("%d ", outputArr[i]);
+    // }
+    // printf("\n");
 
     // //Question 5
     // Node *newHead = createCopyOfList(mySecondList->head);
@@ -59,6 +59,11 @@ int main(void) {
     // //Question 8
     // equalLists(myList, mySecondList);
     // printList(mySecondList);
+
+    printList(myThirdList);
+    int newNum = 65;
+    insElementAscd(newNum, myThirdList);
+    printList(myThirdList);
 
     free(myList);
     free(mySecondList);
